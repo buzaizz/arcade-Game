@@ -4,24 +4,8 @@ var Enemy = function() {
     // 我们已经提供了一个来帮助你实现更多
 
     this.x = -50;
-    this.y = Math.random();
-    if (this.y <= 0.3) {
-        this.y = 230;
-    } else if (this.y <= 0.66) {
-        this.y = 150;
-    } else {
-        this.y = 60;
-    }
-    
-  
-    this.speed = Math.random();
-    if (this.speed <= 0.3) {
-        this.speed = 2;
-    } else if (this.speed <= 0.66) {
-        this.speed = 1.5;
-    } else {
-        this.speed = 1;
-    }
+    this.initY();  
+    this.initSpeed();
 
     
     // 敌人的图片或者雪碧图，用一个我们提供的工具函数来轻松的加载文件
@@ -36,33 +20,38 @@ Enemy.prototype.update = function(dt) {
     this.x = this.x + dt*200*this.speed;
     if (this.x >= 505) {
         this.x = -200;
-
-    this.y = Math.random();
-    if (this.y <= 0.3) {
-        this.y = 230;
-    } else if (this.y <= 0.66) {
-        this.y = 150;
-    } else {
-        this.y = 60;
-    }
-    
-  
-    this.speed = Math.random();
-    if (this.speed <= 0.3) {
-        this.speed = 2;
-    } else if (this.speed <= 0.66) {
-        this.speed = 1.5;
-    } else {
-        this.speed = 1;
-    }
-
+    	this.initY();
+    	this.initSpeed();
     }
 
 };
 
+Enemy.prototype.initSpeed = function() {
+	this.speed = Math.random();
+    	if (this.speed <= 0.3) {
+        	this.speed = 2;
+    	} else if (this.speed <= 0.66) {
+        	this.speed = 1.5;
+    	} else {
+        	this.speed = 1;
+    	}
+}
+
+
+Enemy.prototype.initY = function() {
+	this.y = Math.random();
+    	if (this.y <= 0.3) {
+        	this.y = 230;
+    	} else if (this.y <= 0.66) {
+        	this.y = 150;
+    	} else {
+        	this.y = 60;
+    	}
+}
+
 // 此为游戏必须的函数，用来在屏幕上画出敌人，
 Enemy.prototype.render = function() {
-    if (this.x <= player.x && this.x + 75 >= player.x && this.y + 75 >= player.y && this.y < player.y){
+    if (this.x < player.x + 50 && this.x + 50 > player.x && this.y + 65 > player.y && this.y - 65 < player.y){
     player.y = 400;
     player.x = 200;  
     }
@@ -73,9 +62,7 @@ Enemy.prototype.render = function() {
 // 现在实现你自己的玩家类
 // 这个类需要一个 update() 函数， render() 函数和一个 handleInput()函数
 var Player = function() {
-    this.x = 200;
-    this.y = 400;
-
+    this.initPosition();
     this.sprite = 'images/char-boy.png';
     
 };
@@ -84,8 +71,7 @@ Player.prototype.update = function(dt) {
     // 你应该给每一次的移动都乘以 dt 参数，以此来保证游戏在所有的电脑上
     // 都是以同样的速度运行的
    if (this.y <= 0) {
-    this.y = 400;
-    this.x = 200;
+    this.initPosition();
     }
 
 };
@@ -95,11 +81,16 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.handleInput = function(keyInput) {
-   if (keyInput == 'left' && this.x > 0)  this.x = this.x - 30;
-   if (keyInput == 'right' && this.x < 400) this.x = this.x +30;
-   if (keyInput == 'up' ) this.y = this.y - 30;
-   if (keyInput == 'down' && this.y < 400 ) this.y = this.y + 30;
+   if (keyInput == 'left' && this.x > 0)  this.x = this.x - 50;
+   if (keyInput == 'right' && this.x < 400) this.x = this.x +50;
+   if (keyInput == 'up' ) this.y = this.y - 50;
+   if (keyInput == 'down' && this.y < 400 ) this.y = this.y + 50;
 };
+
+Player.prototype.initPosition = function(){
+	this.x = 200;
+	this.y = 400;
+}
 // 现在实例化你的所有对象
 // 把所有敌人的对象都放进一个叫 allEnemies 的数组里面
 // 把玩家对象放进一个叫 player 的变量里面

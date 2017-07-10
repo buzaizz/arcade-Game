@@ -6,10 +6,10 @@
 
 关于如何开始这个项目的更详细的指导，可以查阅这份[指南](https://gdgdocs.org/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true)。
 
-如何运行
+ ## 如何运行
 
 下载Arcade Game Clone_zh文件夹，点击index.html运行。
 
-如何玩
+ ## 如何玩
 
 键盘‘上’‘下’‘左’‘右’控制小男孩移动，移动过程中躲避甲虫，到达小河游戏胜利。
